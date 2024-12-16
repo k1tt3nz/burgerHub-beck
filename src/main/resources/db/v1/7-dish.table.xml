@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.17.xsd">
+
+
+    <changeSet id="create-dish-table" author="Vladimir Semenov">
+        <createTable tableName="dish">
+            <column name="id" type="UUID" remarks="Идентификатор записи">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="composition_dish" type="UUID" remarks="Состав блюда">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(100)" remarks="Название блюда">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="VARCHAR(50)" remarks="Тип блюда">
+                <constraints nullable="false"/>
+            </column>
+            <column name="price" type="INT" remarks="Цена в рублях">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(500)" remarks="Описания блюда">
+                <constraints nullable="false"/>
+            </column>
+            <column name="image_url" type="VARCHAR(255)" remarks="url на изображение">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint
+                baseTableName="dish"
+                baseColumnNames="composition_dish"
+                constraintName="fk_dish_composition_id"
+                referencedTableName="composition_dish"
+                referencedColumnNames="id"/>
+    </changeSet>
+
+</databaseChangeLog>

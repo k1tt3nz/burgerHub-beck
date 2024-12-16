@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: backend
+    ports:
+      - "8228:8228"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://database:5432/burgerhub
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+    depends_on:
+      - database
+    networks:
+      - app_network  # Подключение к общей сети
+
+  database:
+    image: postgres:16
+    container_name: postgres-db
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_DB: burgerhub
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app_network  # Подключение к общей сети
+
+volumes:
+  postgres_data:
+
+networks:
+  app_network:
+    driver: bridge  # Создаем общую виртуальную сеть для контейнеров

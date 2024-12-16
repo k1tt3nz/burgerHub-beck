@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.17.xsd">
+
+
+    <changeSet id="create-payment-card-table" author="Vladimir Semenov">
+        <createTable tableName="payment_card">
+            <column name="id" type="UUID" remarks="Идентификатор записи">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="UUID" remarks="Идентификатор пользователя">
+                <constraints nullable="false"/>
+            </column>
+            <column name="number" type="VARCHAR(16)" remarks="Номер карты">
+                <constraints nullable="false"/>
+            </column>
+            <column name="expiry_date" type="VARCHAR(16)" remarks="Срок действия">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_major" type="BOOLEAN" remarks="Основная ли карта для оплаты">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="id" tableName="payment_card"/>
+
+        <addForeignKeyConstraint baseTableName="payment_card"
+                                 baseColumnNames="user_id"
+                                 constraintName="fk_user_payment_cards_id"
+                                 referencedTableName="users"
+                                 referencedColumnNames="id"
+                                 onDelete="CASCADE"/>
+
+    </changeSet>
+
+</databaseChangeLog>

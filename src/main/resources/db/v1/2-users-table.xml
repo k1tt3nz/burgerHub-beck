@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.17.xsd">
+
+    <changeSet id="create-users-table" author="Vladimir Semenov">
+        <createTable tableName="users">
+            <column name="id" type="UUID" remarks="Идентификатор записи">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="surname" type="VARCHAR(100)" remarks="Фамилия">
+                <constraints nullable="false"/>
+            </column>
+            <column name="first_name" type="VARCHAR(100)" remarks="Имя">
+                <constraints nullable="false"/>
+            </column>
+            <column name="patronymic" type="VARCHAR(100)" remarks="Отчество">
+                <constraints nullable="true"/>
+            </column>
+            <column name="phone_number" type="VARCHAR(11)" remarks="Номер телефона">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="password" type="VARCHAR(60)" remarks="Пароль (хеш)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR(255)" remarks="email пользователя">
+                <constraints nullable="true" unique="true"/>
+            </column>
+            <column name="address" type="VARCHAR(255)" remarks="Адрес пользователя">
+                <constraints nullable="true"/>
+            </column>
+            <column name="loyalty_points" type="INT" remarks="Баллы лояльности">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

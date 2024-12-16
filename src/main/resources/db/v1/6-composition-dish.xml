@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.17.xsd">
+
+
+    <changeSet id="create-composition-dish-table" author="Vladimir Semenov">
+        <createTable tableName="composition_dish">
+            <column name="id" type="UUID" remarks="Идентификатор записи">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="protein" type="INT" remarks="Содержание белков">
+                <constraints nullable="false"/>
+            </column>
+            <column name="fats" type="INT" remarks="Содержание жиров">
+                <constraints nullable="false"/>
+            </column>
+            <column name="carbohydrate" type="INT" remarks="Содержание углеводов">
+                <constraints nullable="false"/>
+            </column>
+            <column name="calories" type="INT" remarks="Калорийность блюда">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(500)" remarks="Описания состава">
+                <constraints nullable="false"/>
+            </column>
+            <column name="allergens" type="VARCHAR(255)" remarks="Аллергены в составе">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

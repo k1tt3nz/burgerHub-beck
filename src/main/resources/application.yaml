@@ -1,0 +1,22 @@
+server:
+  port: 8228
+
+app:
+  base-endpoint: "/api/v1"
+  admin-endpoint: "/api/v1/admin"
+
+spring:
+  liquibase:
+    change-log: db/main-changelog.xml
+  datasource:
+    url: jdbc:postgresql://localhost:5432/burgerhub # для работы в докер
+    #url: jdbc:postgresql://127.0.0.1:5433/burgerhub # для работы c локалки с бд в докере
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
